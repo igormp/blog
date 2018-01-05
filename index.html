@@ -1,0 +1,29 @@
+---
+layout: default
+---
+<header id="home-header" class="false">
+  <div class="container">
+    <h1>{{ site.title }}</h1>
+    <ul class="icons">
+      <li><a class="fa fa-2x fa-github" href="https://github.com/igormp"><span class="description">GitHub</span></a></li>
+      <li><a class="fa fa-2x fa-twitter" href="https://twitter.com/igormp"><span class="description">Twitter</span></a></li>
+      <li><a class="fa fa-2x fa-linkedin" href="https://br.linkedin.com/in/igormp2"><span class="description">LinkedIn</span></a></li>
+      <li><a class="fa fa-2x fa-envelope" href="mailto:igorphilippini@hotmail.com"><span class="description">Email</span></a></li>
+    </ul>    
+  </div>
+</header>
+<article>
+  <div class="container">
+    <ul class="posts">
+      {% for post in site.posts %}
+        <li>
+          <h2><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h2>
+          <span class="meta">
+            {{ post.date | date_to_string }}
+          </span>
+          {{ post.excerpt }}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</article>
