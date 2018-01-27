@@ -432,6 +432,11 @@ article .container {
   }
 }
 
+article img {
+  float: left;
+  margin-right: 10px;
+}
+
 article p,ul,ol,table {
   color: #515151;
 }
