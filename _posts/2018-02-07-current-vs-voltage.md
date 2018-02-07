@@ -12,7 +12,7 @@ For a better explanation from an actual electrical engineer, I recommend you to 
 
 So, first of all, lots of people seem to not understand what actually kills you, and some even claim that mains voltage is "safe" because they have been shocked before and survived. Well, lemme break it down to you by firstly saying that, if you are one of those that survived and say that it's safe, you were just lucky because, yes, you can die from an AC shock, be it 110V or 220V. **What kills is the current, not the voltage.**
 
-![Current effects chart](images/current_chart.png "Current effects chart")
+![Current effects chart](/blog/images/current_chart.png "Current effects chart")
 The voltage, in layman's terms, is just a way to get current through your skin, and usually anything over 60V is already capable to deliver current through your body. That's why you can touch _with dry hands_ both terminals of a car battery and not feel a thing (they are rated at 12V), since there isn't enough voltage to make the energy go through your skin.
 
 Current, on the other hand, is the actual amount of energy that's running through a medium, and its unit of measurement is the Ampere (usually represented as A or amps). This is not 100% accurate, but should be enough for you to understand. A better and more didactic explanation of current and voltage can be seen [here](https://learn.sparkfun.com/tutorials/voltage-current-resistance-and-ohms-law).
