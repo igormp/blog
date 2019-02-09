@@ -8,11 +8,11 @@ comments: true
 
 For a while I've faced a weird problem with my screenshots where they would glitch, creating a weird image containing part of my desktop background with a black area on top instead of the actual window that I wanted to capture, as seen below.
 
-| ![How the print should look like](/blog/images/regular_print.jpg "How the print should look like") | 
+| ![How the print should look like]({{ site.baseurl }}/images/regular_print.jpg "How the print should look like") | 
 |:--:| 
 | *How it should look* |
 
-| ![The glitched print](/blog/images/glitch_print.jpg "The glitched print") | 
+| ![The glitched print]({{ site.baseurl }}/images/glitch_print.jpg "The glitched print") | 
 |:--:| 
 | *The weird output* |
 
