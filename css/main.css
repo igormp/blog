@@ -71,12 +71,13 @@ pre code {
 /* Tables */
 table {
   margin-bottom: 1rem;
-  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
   border: 1px solid #e5e5e5;
   border-collapse: collapse;
 }
 table img {
-  width: 100%;
+  max-width: 100%;
 }
 td,
 th {
@@ -436,8 +437,8 @@ article .container {
 }
 
 article img {
-  float: left;
   margin-right: 10px;
+  max-width: 100%;
 }
 
 article p,ul,ol,table {
