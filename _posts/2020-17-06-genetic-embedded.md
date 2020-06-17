@@ -53,14 +53,14 @@ Another important thing about each board is a way for us to know how well it is 
 void checkFitness(){
     fitness = 0;
 
-    // Hashtable to easily verify queens on the same row
+    // Hashtable to easily verify queens on the same column
     std::array<uint8_t, 8> values;
     values.fill(0);
     for (uint8_t i = 0; i < rows.size(); i++){
         values[rows[i]]++;
     }
 
-    // Increases fitness for every queen in a row
+    // Increases fitness for every queen in the same column
     for (unsigned int i = 0; i < values.size(); i++){
         if (values[i] > 1){
             fitness += values[i] - 1;
@@ -131,14 +131,16 @@ Another key element of GAs is the **crossover** step, also called recombination,
 Since each board in our population is a single array with 8 elements, we can generate a new board by simply picking 2 random individuals, selecting a random number X between 1 and 7, picking the first X elements of the fist parent and combining those with the last 8-X elements of our second individual to generate our new baby, always with a chance to mutate it randomly.
 
 ```C++
-crossover(std::array<uint8_t, 8> *parent1, std::array<uint8_t, 8> *parent2,
-          uint8_t crossoverPoint, uint16_t mutationRatio){
+crossover(std::array<uint8_t, 8> const &parent1, std::array<uint8_t, 8> const &parent2,
+             uint8_t crossoverPoint, uint16_t mutationRatio){
+    // Merges the beggining of the first parent with the remaning of our
+    // second parent into our new individual
     for (uint8_t i = 0; i < crossoverPoint; i++){
-        rows[i] = (*parent1)[i];
+        rows[i] = parent1[i];
     }
 
     for (uint8_t i = crossoverPoint; i < rows.size(); i++){
-        rows[i] = (*parent2)[i];
+        rows[i] = parent2[i];
     }
 
     if (1 == (std::rand() / ((RAND_MAX + 1u) / mutationRatio))){
@@ -156,7 +158,7 @@ class board{
 public:
     board();
     board(
-        std::array<uint8_t, 8> *parent1, std::array<uint8_t, 8> *parent2,
+        std::array<uint8_t, 8> const &parent1, std::array<uint8_t, 8> const &parent2,
         uint8_t crossoverPoint, uint16_t mutationRatio = 10);
     ~board();
 
@@ -226,7 +228,7 @@ reproduce(uint32_t amount){
 
         uint8_t crossoverPoint = 1 + (std::rand() / ((RAND_MAX + 1u) / 7));
 
-        board temp(&(boards[first].rows), &(boards[second].rows), crossoverPoint);
+        board temp((boards[first].rows), (boards[second].rows), crossoverPoint);
         boards.push_back(temp);
     }
     sortPopulation();
@@ -240,7 +242,7 @@ See how that overload for a new board came in handy? I can generate a new one by
 We now have all of our previous population living along together with their new offspring, which is really nice and cute. However, just like nature, we need to get rid of some of those, or else we'll run out of RAM eventually. We could simply chop off the worst-performing individuals in our population, but do you remember what I said about keeping diversity before? In order to not get stuck in a local minimum, I'll be keeping the worst 10% of our current population, and then getting rid of the other ones until we get back to our original population size.
 
 ```C++
-selection(){
+purge(){
     uint32_t len = boards.size();
 
     // Let's keep diversity in our gene pool
@@ -254,7 +256,7 @@ selection(){
 }
 ```
 
-I've awfully named this step as selection, when that should be the process where we _select_ the parents for our new offspring, but I'm too lazy to change this now so we will need to live with it.
+I had previously awfully named this step as selection, when that should be the process where we _select_ the parents for our new offspring, but after a quick review from a friend of mine, it's now properly called `purge`.
 
 Anyway, putting this all together gives us a really clean population:
 
@@ -270,7 +272,7 @@ public:
 
     void sortPopulation();
     void reproduce(uint32_t amount = 50);
-    void selection();
+    void purge();
 };
 ```
 
@@ -302,7 +304,7 @@ int main(int argc, char const *argv[]){
         std::cout << " fitness: " << unsigned(pop.boards.back().fitness) << std::endl;
 
         pop.reproduce(50);
-        pop.selection();
+        pop.purge();
         epochs++;
     }
     std::cout << "Took " << epochs << " epochs ";
@@ -368,7 +370,7 @@ int main()
         pc.printf(" fitness: %u\r\n", pop.boards.back().fitness);
 
         pop.reproduce(100);
-        pop.selection();
+        pop.purge();
         epochs++;
     }
     pc.printf("Took %d epochs ", epochs);
