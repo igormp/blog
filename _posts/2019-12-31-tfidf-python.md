@@ -3,7 +3,7 @@ layout: post
 title: "Word raking with tf-idf and Python"
 date: 2019-12-31 06:40:00 -0300
 bg: no
-comments: false
+comments: true
 ---
 
 This year I started working in a startup that focuses on various solutions for law firms. During the development of one of those solutions, I stumbled on a problem where I had to rank words for a specific legal document, considering the relevance of each word when compared against all of the others in a set of documents. How did I manage to solve this?

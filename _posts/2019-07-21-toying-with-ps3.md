@@ -3,7 +3,7 @@ layout: post
 title: "Toying with a PS3 in 2019"
 date: 2019-07-21 05:00:00 -0300
 bg: no
-comments: false
+comments: true
 ---
 
 I recently bought a PS3 for the sake of it. I didn't even plan to play games on it, however, I wanted to see how hackeable it actually is. Since I got a FAT model (a CECHG to be exact), it is possible for it to suffer from the infamous YLOD, so the first thing I did was to open it up and replace the thermal paste.
