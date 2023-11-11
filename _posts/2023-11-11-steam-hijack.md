@@ -99,3 +99,9 @@ Oh, why the heck am I removing the first character of the path? Anyhow, let's fi
 Yay! Finally managed to reach 50MB/s! That's only half of my actual available bandwidth, but I'll settle with that. Only took me two hours to speed up the download for the remaining 6GB of the game at faster speeds instead of the 10 minutes that it would have taken me to download it at full speed, but hey, where would be the fun in that?
 
 The final code for the service can be found [here](https://github.com/igormp/steam-lancache-hijack). I plan on maybe adding some more features to it, like being able to specify which CDN to use (currently it randomly choses one for each request), automatically overwrite the hosts file, maybe even add a GUI, and make it available for Windows users, but no promises on that.
+
+**Edit**: After trying it out again, I almost maxed my Gbit connection this time, so double yay!
+
+| <img src="{{ site.baseurl }}/images/steam-hijack/almost_gbit.jpg"> |
+| :----------------------------------------------------------------: |
+|           _~90MB/s, closing on maxing a Gbit connection_           |
