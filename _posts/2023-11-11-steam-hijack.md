@@ -28,35 +28,7 @@ Another source that gave me the certainty that this is viable was [this link](ht
 
 ## Their original idea
 
-I'm going to leave a copy of the original post here for posterity, but I'll also give a quick explanation of what they did (in English):
-<detais>
-
-<summary>Original post (in Portuguese)</summary>
-Sim, por padrão o pihole instala o lighttpd (da pra fazer nos outros servers eu acho mas n sei específicos).
-
-No painel web em Local DNS você precisa apontar `lancache.steamcontent.com` pro ip do pihole (IPv4 e v6).
-
-Depois por SSH adicionar essas linhas em `/etc/lighttpd/external.conf`
-
-```
-url.redirect = (
-  "^/depot/(.*)" => "http://steampipe.akamaized.net/depot/$1"
-)
-server.max-keep-alive-requests=3000
-$HTTP["url"] =~ "^/depot" { accesslog.filename = ""}
-```
-
-As opções de CDN são:
-
-Akamai: `steampipe.akamaized.net` ou `akamai.cdn.steampipe.steamcontent.com`
-Google: `google.cdn.steampipe.steamcontent.com` (tbm tem google2)
-Level3/Lumen: `level3.cdn.steampipe.steamcontent.com`
-Highwinds/Stackpath: `f3b7q2p3.ssl.hwcdn.net`
-Depois só reiniciar o lighttpd ou o pihole inteiro e testar. Recomendo trocar a região do mesmo jeito pois o cliente pode abrir mais um monte de conexões se a lista de servidores tiver mais do que um.
-
-EDIT: Ainda tô testando essa última linha de desligar o log.
-
-</details>
+I'm going to leave a copy of the original post [here (in Portuguese)](https://gist.github.com/igormp/7d30b4eb5ae59e9151574210b07584d2) for posterity, but I'll also give a quick explanation of what they did (in English):
 
 Basically what they did was to redirect any call to `lancache.steamcontent.com` by overriding their local DNS to resolve the Steam lancache request to their PiHole's IP, and then they added some lines to their lighttpd config to redirect any request to `lancache.steamcontent.com` to a specific CDN.
 
